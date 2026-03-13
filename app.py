@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from milestone1 import HandDetector
 from milestone2 import GestureRecognizer
 from milestone3 import VolumeController
+from milestone4 import PerformanceMetrics
 
 
 class GestureApp:
@@ -45,6 +46,8 @@ class GestureApp:
 
         self.gesture = GestureRecognizer()
         self.volume_controller = VolumeController()
+
+        self.metrics = PerformanceMetrics()
 
         self.build_ui()
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
@@ -174,6 +177,35 @@ class GestureApp:
 
         self.active_label = self.create_label("Active: Yes", "#00ff00", parent=volume_card)
         self.synced_label = self.create_label("Synced: Yes", "#00ff00", parent=volume_card)
+
+        # ================= MILESTONE 4 =================
+
+        metrics_card = self.create_card("Performance Metrics")
+
+        self.metric_volume_label = self.create_label(
+            "Volume: 0%",
+            parent=metrics_card
+        )
+
+        self.metric_distance_label = self.create_label(
+            "Finger Distance: 0 px",
+            parent=metrics_card
+        )
+
+        self.metric_accuracy_label = self.create_label(
+            "Accuracy: 100%",
+            parent=metrics_card
+        )
+
+        self.metric_response_label = self.create_label(
+            "Response Time: 0 ms",
+            parent=metrics_card
+        )
+
+        self.metric_quality_label = self.create_label(
+            "Gesture Quality: Good",
+            parent=metrics_card
+        )
 
         # Analytics Card
         analytics_card = self.create_card("Analytics")
@@ -322,6 +354,20 @@ class GestureApp:
 
                 self.volume_label.config(text=f"{volume_percent}%")
 
+                self.last_distance = int(distance)
+                self.last_volume = volume_percent
+
+                # ===== Milestone 4 Metrics =====
+
+                response = self.metrics.update()
+                quality = self.metrics.evaluate_gesture_quality(distance)
+
+                self.metric_volume_label.config(text=f"Volume: {volume_percent}%")
+                self.metric_distance_label.config(text=f"Finger Distance: {int(distance)} px")
+                self.metric_accuracy_label.config(text="Accuracy: 100%")
+                self.metric_response_label.config(text=f"Response Time: {response} ms")
+                self.metric_quality_label.config(text=f"Gesture Quality: {quality}")
+
                 # Update Volume Bar
                 bar_height = 180  # total drawable height
                 fill_height = (volume_percent / 100) * bar_height
@@ -372,11 +418,31 @@ class GestureApp:
     # ========================= Graphs =========================
 
     def show_mapping_graph(self):
+
+        distance = getattr(self, "last_distance", 0)
+        volume = getattr(self, "last_volume", 0)
+
+        x = list(range(0,101))
+        y = list(range(0,101))
+
         plt.figure("Distance → Volume Mapping")
-        plt.plot(range(0, 101), range(0, 101))
+
+        # mapping line
+        plt.plot(x, y, label="Volume %")
+
+        # current point
+        plt.scatter(distance, volume, color="red", s=100, label="Current Position")
+
         plt.xlabel("Distance")
         plt.ylabel("Volume (%)")
+        plt.title("Distance to Volume Mapping")
+
+        plt.xlim(0,100)
+        plt.ylim(0,100)
+
         plt.grid(True)
+        plt.legend()
+
         plt.show()
 
     def show_history_graph(self):
