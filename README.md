@@ -1,5 +1,7 @@
 # ✋ Volume Control using Hand Gestures
 
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A computer vision-based application that enables users to control system volume using hand gestures captured through a webcam. The system detects hand landmarks in real time and maps finger distance to volume levels, providing a completely touch-free interaction experience.
 
 ---
