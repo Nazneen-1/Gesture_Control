@@ -34,19 +34,19 @@ It is designed for:
 
 ## 🧠 How It Works
 
-- 1. Hand Detection
+1. Hand Detection
     - Webcam feed is processed using MediaPipe Hands
     - 21 landmarks are detected per hand
-- 2. Gesture Recognition
+2. Gesture Recognition
     - Thumb tip (Landmark 4) and Index tip (Landmark 8) are tracked
     - Euclidean distance between them is calculated
-- 3. Volume Mapping
+3. Volume Mapping
     - Distance is normalized between predefined min and max values
     - Mapped linearly to system volume (0–100%)
-- 4. Volume Control
+4. Volume Control
     - System volume is updated using Pycaw
     - History of last 20 values is stored
-- 5. UI & Feedback
+5. UI & Feedback
     - Real-time camera feed with landmark overlay
     - Volume bar and percentage display
     - Performance metrics:
