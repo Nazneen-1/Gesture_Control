@@ -58,12 +58,12 @@ It is designed for:
 
 ## 🖥️ User Interface
 
-🔹 Before Starting Camera
+Before Starting Camera
 - Camera inactive
 - UI panels visible
 - Graph placeholders initialized
 
-🔹 After Starting Camera
+After Starting Camera
 - Live hand tracking with landmarks
 - Distance measurement between fingers
 - Real-time volume updates
@@ -117,23 +117,23 @@ python app.py
 
 ## 📊 Modules Implemented
 
-🔹 Milestone 1: Hand Detection
+Milestone 1: Hand Detection
 
 - Webcam integration using OpenCV
 - Hand landmark detection using MediaPipe
 
-🔹 Milestone 2: Gesture Recognition
+Milestone 2: Gesture Recognition
 
 - Distance calculation between fingers
 - Gesture classification (Closed, Pinch, Open)
 
-🔹 Milestone 3: Volume Control
+Milestone 3: Volume Control
 
 - Distance → Volume mapping
 - System volume adjustment using Pycaw
 - Volume smoothing and history tracking
 
-🔹 Milestone 4: UI & Feedback
+Milestone 4: UI & Feedback
 - Interactive Tkinter UI
 - Real-time performance metrics
 - Graph analytics
